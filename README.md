@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Curso de React - Hora de Codar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Aula 1
 
-## Available Scripts
+### O que é React?
 
-In the project directory, you can run:
+- Uma biblioteca JavaScript para criação de interfaces.
+- Utilizado para construir SPAs (Single Page Application) - um arquivo só de index e rodar toda a aplicação.
+- Baseado em componentes - questão de arquitetura onde o React vai subdividir (como um quebra-cabeça) o nosso site e ai a gente pode estar reaproveitando essas peças do quebra-cabeça em diversos lugares.
+- Utiliza o JSX para renderizar HTML - basicamente o que vamos escrever: o HTML no React no JS.
+- E aplica o Virtual DOM para realizar as alterações de DOM.
+- Podemos adicionar a um projeto ou criar um projeto com ele.
 
-### `npm start`
+## Aula 2
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Como instalar o React?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Para instalar o React vamos utilizar uma ferramenta chamada Create React App.
+- Recebemos todos os arquivos da biblioteca e temos como executá-la.
+- Para utilizar precisamos do Node e também npm.
+- Esta ferramenta também otimiza o app gerado para produção.
+- É possível iniciar a aplicação com `npm start`.
 
-### `npm test`
+#### Create React App
+  
+```bash
+npx create-react-app nome-do-projeto
+```
+`npm start` - inicializa o servidor de desenvolvimento.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm build` - constrói o aplicativo para produção.
 
-### `npm run build`
+#### Explicação de alguns arquivos do projeto
+🟥 ***index.html***
+- Ponto de partida: o navegador abrirá este arquivo quando rodarmos a aplicação.
+- A partir deste elemento `<div id="root"></div>`, o React é executado.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🟦 ***index.css***
+- Gera um CSS para aplicação toda, é basicamente um estilo global da aplicação.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🟨 ***index.js***
+- Arquivo base, que vai fazer o bootstrap de fato, importa o componente: `./App` que é de onde vai partir a aplicação e vai abrir/inserir esse app no root que seria aquele do HTML (a div no caso).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🟨 ***App.js***
+- Arquivo que inicializa o projeto - o que alterar aqui reflete na nossa página.
 
-### `npm run eject`
+🟧 ***App.test.js***
+- Arquivo de teste, serve para testar a aplicação (nome autoexplicativo).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Fluxo do React
+O fluxo do React começa com o arquivo ***index.js***. Neste arquivo, o ReactDOM é utilizado para renderizar o componente principal da aplicação na página HTML. Geralmente, é a linha de código abaixo:
+```bash
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+Isso significa que o componente App será renderizado dentro de um elemento com o id "root" no arquivo HTML.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Agora, no arquivo ***App.js***. Este é o componente principal da aplicação. Aqui, você define a estrutura geral da sua aplicação e pode incluir outros componentes React conforme necessário. Exemplo:
+```bash
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+function App() {
+    return (
+        <div>
+            {/* Conteúdo da aplicação */}
+        </div>
+    );
+}
 
-## Learn More
+export default App;
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Dentro do componente App, você define a estrutura da sua aplicação, como cabeçalhos, barras de navegação, e outras partes da interface do usuário.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Finalmente, temos a `<div id="root">` no arquivo HTML. Esta é a div onde o React irá renderizar sua aplicação. É geralmente a única coisa dentro do corpo `<body>` do arquivo index.html. Exemplo:
+```bash
+<div id="root"></div>
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Quando você executa sua aplicação React, o ReactDOM pega o componente App e o renderiza dentro da div com id "root". Isso marca o início da sua aplicação React, e a partir daí, o React cuida da atualização da interface do usuário conforme necessário.
