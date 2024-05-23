@@ -1,81 +1,130 @@
-# Curso de React - Hora de Codar
+## Aula 4
+### Criando Componentes
+- Permitem dividir a aplicação em partes, podendo ser reutilizados em vários locais.
+- Os componentes renderizam **JSX**, assim como  🟨***App.js*** (que é um componente).
+- Precisamos criar um arquivo de componente.
+- E importá-lo onde precisamos utilizar, usando ```export``` que é uma função que me permite disponibilizar o conteúdo de um arquivo para o outro.
+- Normalmente ficam em uma pasta chamada 📁***components***, porém poderemos criar mais pastas dependendo da organização e foco do nosso projeto.
 
-## Aula 1
+📂**src** - Utilizaremos bastante para criação de novos arquivos e pastas.
 
-### O que é React?
+### Criação do Componente
+Quando a gente cria um componente, seja ele o que for a gente sempre vai ter que trabalhar com a seguinte case/convenção: **letras maiúsculas as iniciais e as que separam as outras palavram também**.
 
-- Uma biblioteca JavaScript para criação de interfaces.
-- Utilizado para construir SPAs (Single Page Application) - um arquivo só de index e rodar toda a aplicação.
-- Baseado em componentes - questão de arquitetura onde o React vai subdividir (como um quebra-cabeça) o nosso site e ai a gente pode estar reaproveitando essas peças do quebra-cabeça em diversos lugares.
-- Utiliza o JSX para renderizar HTML - basicamente o que vamos escrever: o HTML no React no JS.
-- E aplica o Virtual DOM para realizar as alterações de DOM.
-- Podemos adicionar a um projeto ou criar um projeto com ele.
+**Exemplo -** Consigo separar HelloWorld em duas palavras (Hello World), então o nome do seu arquivo vai ser HelloWorld.
 
-## Aula 2
 
-### Como instalar o React?
+**Algumas Observações** 🧐
+- No react declarar função é basicamente a mesma coisa que criar um componente.
+- Além disso, o return no React é diferente do que return nas outras linguagens, como estamos encapsulando o **JSX** teremos um ```()``` abre e fecha parênteses e dentro desses parênteses a gente coloca o nosso **HTML**.
+- Sempre bom lembrar que precisamos de um wrapper, que é algo que vai envolver todo o nosso componente que pode ser uma div, nem sempre é, mas geralmente é.
 
-- Para instalar o React vamos utilizar uma ferramenta chamada Create React App.
-- Recebemos todos os arquivos da biblioteca e temos como executá-la.
-- Para utilizar precisamos do Node e também npm.
-- Esta ferramenta também otimiza o app gerado para produção.
-- É possível iniciar a aplicação com `npm start`.
-
-#### Create React App
-  
+### Primeiro componente criado
 ```bash
-npx create-react-app nome-do-projeto
-```
-`npm start` - inicializa o servidor de desenvolvimento.
+function HelloWorld() {
 
-`npm build` - constrói o aplicativo para produção.
-
-#### Explicação de alguns arquivos do projeto
-🟥 ***index.html***
-- Ponto de partida: o navegador abrirá este arquivo quando rodarmos a aplicação.
-- A partir deste elemento `<div id="root"></div>`, o React é executado.
-
-🟦 ***index.css***
-- Gera um CSS para aplicação toda, é basicamente um estilo global da aplicação.
-
-🟨 ***index.js***
-- Arquivo base, que vai fazer o bootstrap de fato, importa o componente: `./App` que é de onde vai partir a aplicação e vai abrir/inserir esse app no root que seria aquele do HTML (a div no caso).
-
-🟨 ***App.js***
-- Arquivo que inicializa o projeto - o que alterar aqui reflete na nossa página.
-
-🟧 ***App.test.js***
-- Arquivo de teste, serve para testar a aplicação (nome autoexplicativo).
-
-
-## Fluxo do React
-O fluxo do React começa com o arquivo ***index.js***. Neste arquivo, o ReactDOM é utilizado para renderizar o componente principal da aplicação na página HTML. Geralmente, é a linha de código abaixo:
-```bash
-ReactDOM.render(<App />, document.getElementById('root'));
-```
-Isso significa que o componente App será renderizado dentro de um elemento com o id "root" no arquivo HTML.
-
-Agora, no arquivo ***App.js***. Este é o componente principal da aplicação. Aqui, você define a estrutura geral da sua aplicação e pode incluir outros componentes React conforme necessário. Exemplo:
-```bash
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-function App() {
     return (
         <div>
-            {/* Conteúdo da aplicação */}
+            <h1>Meu primeiro Componente</h1>
         </div>
-    );
+    )
+}
+export default HelloWorld
+```
+
+Para estarmos conseguindo utilizar esse componente em outro arquivo, para que assim o mesmo seja exibido na nossa página, temos que importar o componente e informar arquivo em que esse componente está por meio do ```import``` no 🟨***App.js***.
+
+```bash
+import HelloWorld from './components/HelloWorld';
+```
+
+Porém apenas importar não é o suficiente, para que o componente apareça no site precisamos "chamar" o mesmo no nosso código, por enquanto só importamos, para estarmos conseguindo chamar esse componente basta abrir e fechar tag e digitar o nome do componente:
+
+```
+<HelloWorld/>
+```
+
+Outro conceito fundamental dos componentes é que os mesmos tem que ser reutilizáveis, ou seja, temos que poder utilizar o componente em qualquer lugar da minha aplicação e poder renderizar coisas diferentes com esse componente.
+
+### Importando componentes dentro de componentes
+Um ponto legal é que não precisamos necessariamente importar os componentes lá no 🟨***App.js***, podemos importar em outros componentes e assim fazer uma "escadinha", onde um puxa o outro.
+
+#### Exemplo:
+Criamos outro componente chamado Frase em um arquivo diferente e importamos esse componente no arquivo do componente HelloWord.
+
+🟨**Frase.js**
+```bash
+function Frase() {
+    return (
+        <div>
+            <p>Este é um componente com uma frase!</p>
+        </div>
+    )
+}
+export default Frase
+```
+
+🟨***HelloWorld.js***
+```bash
+import Frase from "./Frase"
+
+function HelloWorld() {
+    return (
+        <div>
+            <Frase/>
+            <h1>Meu primeiro Componente</h1>
+        </div>
+    )
+}
+export default HelloWorld
+```
+
+Nesse caso importamos o componente **Frase** no componente **HelloWorld** e dessa maneira passamos apenas o HelloWorld, com o componente Frase dentro dele, para o 🟨***App.js***:
+```bash
+import './App.css';
+import HelloWorld from './components/HelloWorld';
+
+function App() {
+
+  const name = 'Thiago'
+  const newName = name.toUpperCase()
+
+  function sum(a, b) {
+    return a + b
+  }
+
+  const url = "https://via.placeholder.com/150"
+  return (
+    <div className="App">
+     <h2>Alterando o JSX</h2>
+     <p>Olá, {newName}</p>
+     <p>Soma: {sum(1,2)}</p> {/*Executando algumas funções do próprio JavaScript */}
+    <img src={url} alt='Minha Imagem'/>
+    <HelloWorld/>
+    </div>
+  );
 }
 
 export default App;
 ```
 
-Dentro do componente App, você define a estrutura da sua aplicação, como cabeçalhos, barras de navegação, e outras partes da interface do usuário.
+A saída disso no site:
+![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/529e96a7-f7c6-40e2-a6fb-e94b8018a06d)
 
-Finalmente, temos a `<div id="root">` no arquivo HTML. Esta é a div onde o React irá renderizar sua aplicação. É geralmente a única coisa dentro do corpo `<body>` do arquivo index.html. Exemplo:
+#### Reutilização de um mesmo componente
+Exemplo simples de reutilização de um componente:
+
+🟨***HelloWorld.js***
 ```bash
-<div id="root"></div>
+        <div>
+            <Frase/>
+            <h1>Meu primeiro Componente</h1>
+            {/* Exemplo de reutilização */}
+            <Frase/> 
+            <Frase/>
+        </div>
+export default HelloWorld
 ```
 
-Quando você executa sua aplicação React, o ReactDOM pega o componente App e o renderiza dentro da div com id "root". Isso marca o início da sua aplicação React, e a partir daí, o React cuida da atualização da interface do usuário conforme necessário.
+Saída disso no site:
+![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/f6b6d569-dd8a-42e6-bab6-0f3efdcafdd5)
