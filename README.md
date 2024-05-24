@@ -304,3 +304,14 @@ Saída disso no site:
 ![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/f6b6d569-dd8a-42e6-bab6-0f3efdcafdd5)
 
 
+## Aula 5
+### Props
+
+- As props são valores passados para componentes, de cima para baixo, ou seja, um componente filho vai receber uma propriedade de um componente pai que pode ser por exemplo: nome (Thiago), idade (18) e por ai vai, qualquer tipo de dado que pode ser passado para um componente.
+- Podemos deixá-los dinâmicos.
+- Ou seja, mudando a execução por causa do valor da prop.
+- O valor é passado como um atributo na chamada do componente.
+- E precisa ser resgatado dentro de uma propriedade/argumento chamada props na função de definição do componente.
+- As props são somente de leitura!
+
+**Vídeo - 2:36**
