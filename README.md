@@ -1,130 +1,111 @@
-## Aula 4
-### Criando Componentes
-- Permitem dividir a aplicação em partes, podendo ser reutilizados em vários locais.
-- Os componentes renderizam **JSX**, assim como  🟨***App.js*** (que é um componente).
-- Precisamos criar um arquivo de componente.
-- E importá-lo onde precisamos utilizar, usando ```export``` que é uma função que me permite disponibilizar o conteúdo de um arquivo para o outro.
-- Normalmente ficam em uma pasta chamada 📁***components***, porém poderemos criar mais pastas dependendo da organização e foco do nosso projeto.
+## Aula 5
 
-📂**src** - Utilizaremos bastante para criação de novos arquivos e pastas.
+### Props
 
-### Criação do Componente
-Quando a gente cria um componente, seja ele o que for a gente sempre vai ter que trabalhar com a seguinte case/convenção: **letras maiúsculas as iniciais e as que separam as outras palavram também**.
+- As props são valores passados para componentes, de cima para baixo, ou seja, um componente filho vai receber uma propriedade de um componente pai que pode ser por exemplo: nome (Thiago), idade (18) e por aí vai, qualquer tipo de dado que pode ser passado para um componente.
+- Podemos deixá-los dinâmicos.
+- Ou seja, mudando a execução por causa do valor da prop.
+- O valor é passado como um atributo na chamada do componente.
+- E precisa ser resgatado dentro de uma propriedade/argumento chamada props na função de definição do componente.
+- As props são somente de leitura!
 
-**Exemplo -** Consigo separar HelloWorld em duas palavras (Hello World), então o nome do seu arquivo vai ser HelloWorld.
+### Onde as props são colocadas?
 
-
-**Algumas Observações** 🧐
-- No react declarar função é basicamente a mesma coisa que criar um componente.
-- Além disso, o return no React é diferente do que return nas outras linguagens, como estamos encapsulando o **JSX** teremos um ```()``` abre e fecha parênteses e dentro desses parênteses a gente coloca o nosso **HTML**.
-- Sempre bom lembrar que precisamos de um wrapper, que é algo que vai envolver todo o nosso componente que pode ser uma div, nem sempre é, mas geralmente é.
-
-### Primeiro componente criado
 ```bash
-function HelloWorld() {
+function SayMyName(props) {
+    return ();
+}
 
+export default SayMyName;
+```
+
+Passamos ela como argumento para a função. Esse argumento é onde o nome que a gente vai passar (nesse caso um só, porém, poderia ser mais, não tem limite) vai condensar na propriedade uma ou mais, nesse cara aqui, e posteriormente eu vou poder acessar `props.nome` na propriedade como se fosse um objeto JavaScript para poder imprimir ela no HTML.
+
+### Fazendo o componente dinâmico:
+```bash
+function SayMyName(props) {
     return (
         <div>
-            <h1>Meu primeiro Componente</h1>
-        </div>
-    )
-}
-export default HelloWorld
+            <p>Fala aí {props.nome}, suave?</p>
+        </div
+
 ```
 
-Para estarmos conseguindo utilizar esse componente em outro arquivo, para que assim o mesmo seja exibido na nossa página, temos que importar o componente e informar arquivo em que esse componente está por meio do ```import``` no 🟨***App.js***.
-
+Lá dentro do 🟨***App.js*** vamos fazer todo aquele procedimento de importar o componente, porém, para exibir tem uma diferença.
+Como esse componente precisa de um argumento do tipo nome, a gente chama ele dentro do 🟨***App.js*** da maneira que chamamos os outros componentes `<Componente/>`, só que passando o valor do atributo para ele, dessa forma aqui:
 ```bash
-import HelloWorld from './components/HelloWorld';
+<SayMyName nome="Thiago"/>
 ```
 
-Porém apenas importar não é o suficiente, para que o componente apareça no site precisamos "chamar" o mesmo no nosso código, por enquanto só importamos, para estarmos conseguindo chamar esse componente basta abrir e fechar tag e digitar o nome do componente:
-
-```
-<HelloWorld/>
-```
-
-Outro conceito fundamental dos componentes é que os mesmos tem que ser reutilizáveis, ou seja, temos que poder utilizar o componente em qualquer lugar da minha aplicação e poder renderizar coisas diferentes com esse componente.
-
-### Importando componentes dentro de componentes
-Um ponto legal é que não precisamos necessariamente importar os componentes lá no 🟨***App.js***, podemos importar em outros componentes e assim fazer uma "escadinha", onde um puxa o outro.
-
-#### Exemplo:
-Criamos outro componente chamado Frase em um arquivo diferente e importamos esse componente no arquivo do componente HelloWord.
-
-🟨**Frase.js**
+### Reaproveitamento de componentes de forma dinâmica:
 ```bash
-function Frase() {
-    return (
-        <div>
-            <p>Este é um componente com uma frase!</p>
-        </div>
-    )
-}
-export default Frase
+return (
+    <div className="App">
+      <HelloWorld/>
+      <SayMyName nome="Thiago"/>
+      <SayMyName nome="Neymar"/>
+    </div>
+);
 ```
 
-🟨***HelloWorld.js***
+### Agora passando via variável ficaria assim:
 ```bash
-import Frase from "./Frase"
-
-function HelloWorld() {
-    return (
-        <div>
-            <Frase/>
-            <h1>Meu primeiro Componente</h1>
-        </div>
-    )
-}
-export default HelloWorld
-```
-
-Nesse caso importamos o componente **Frase** no componente **HelloWorld** e dessa maneira passamos apenas o HelloWorld, com o componente Frase dentro dele, para o 🟨***App.js***:
-```bash
-import './App.css';
-import HelloWorld from './components/HelloWorld';
-
-function App() {
-
-  const name = 'Thiago'
-  const newName = name.toUpperCase()
-
-  function sum(a, b) {
-    return a + b
-  }
-
-  const url = "https://via.placeholder.com/150"
+const name = "Messi"
   return (
     <div className="App">
-     <h2>Alterando o JSX</h2>
-     <p>Olá, {newName}</p>
-     <p>Soma: {sum(1,2)}</p> {/*Executando algumas funções do próprio JavaScript */}
-    <img src={url} alt='Minha Imagem'/>
-    <HelloWorld/>
+      <HelloWorld/>
+      <SayMyName nome="Thiago"/>
+      <SayMyName nome="Neymar"/>
+      <SayMyName nome={name}/>
     </div>
-  );
+```
+
+### Agora, partindo para um componente um pouco mais estruturado:
+```bash
+function Pessoa(props){
+    return(
+        <div>
+            <img src={props.foto} alt={props.nome} />
+            <h2>Nome: {props.nome}</h2>
+            <p>Idade: {props.idade}</p>
+            <p>Profissão: {props.profissao}</p>
+        </div>
+    )
 }
 
-export default App;
+export default Pessoa
 ```
 
-A saída disso no site:
-![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/529e96a7-f7c6-40e2-a6fb-e94b8018a06d)
 
-#### Reutilização de um mesmo componente
-Exemplo simples de reutilização de um componente:
-
-🟨***HelloWorld.js***
+A gente preencheria ele da mesma forma que o anterior:
 ```bash
-        <div>
-            <Frase/>
-            <h1>Meu primeiro Componente</h1>
-            {/* Exemplo de reutilização */}
-            <Frase/> 
-            <Frase/>
-        </div>
-export default HelloWorld
+<Pessoa 
+      nome="Thiago" 
+      idade="18" 
+      profissao="Analista" 
+      foto="https://via.placeholder.com/150"/>
 ```
 
-Saída disso no site:
-![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/f6b6d569-dd8a-42e6-bab6-0f3efdcafdd5)
+### Utilizando Destructuring para simplificar
+Para evitar ficar repetindo o `props` a todo momento, podemos utilizar um recurso do JavaScript chamado Destructuring. Podemos transformar esse objeto `props` já no nome da propriedade, sem precisar ficar chamando sempre esse mesmo objeto, o que acaba deixando o componente muito mais simples.
+
+
+### Como fazer isso❓
+
+Podemos dizer que o objeto que recebemos na função vai virar alguns valores que seriam o nome, idade, profissão e a foto. Ficaria assim basicamente:
+```bash
+function Pessoa({ nome, idade, profissao, foto }){
+    return(
+        <div>
+            <img src={foto} alt={nome} />
+            <h2>Nome: {nome}</h2>
+            <p>Idade: {idade}</p>
+            <p>Profissão: {profissao}</p>
+        </div>
+    )
+}
+
+export default Pessoa
+```
+
+Dessa forma o componente ficou muito mais simples e a gente tem o mesmo resultado dentro do site.
