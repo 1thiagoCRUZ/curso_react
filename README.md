@@ -1,10 +1,11 @@
-Aula 7 
+# Aula 7 
 ### Utilizando React Fragments
 
 - Os ***React Fragments*** permitem a criação de um componente sem elemento pai;
 Ou seja não é preciso colocar mais aquela DIV que era "obrigatória" nas aulas anteriores, vamos simplesmente utilizar de um ```placeholder``` e aí podemos entregar diversos componentes filhos a partir disso.
 
 Basicamente é algo que retorna um elemento só, que é um requisito do React, mas ele não entrega um tag assim não sendo obrigatória a DIV. 
+
 
 - O propósito é descomplicar os nós de DOM;
 
@@ -38,7 +39,7 @@ export default List
 Temos o conteúdo da lista envolto por tags vazias e não mais aquela DIV que anteriormente era "obrigatória".
 
 
-Uma outra forma de reaproveitar componentes seria a de criar um arquivo para os itens e passar eles por meio de props para a Lista.
+Uma outra forma de reaproveitar componentes seria a de criar um arquivo para os itens e passar eles por meio de ```props``` para a Lista.
 Dessa forma aqui
 
 🟨 ***Item.js***
