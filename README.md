@@ -1,130 +1,78 @@
-## Aula 4
-### Criando Componentes
-- Permitem dividir a aplicação em partes, podendo ser reutilizados em vários locais.
-- Os componentes renderizam **JSX**, assim como  🟨***App.js*** (que é um componente).
-- Precisamos criar um arquivo de componente.
-- E importá-lo onde precisamos utilizar, usando ```export``` que é uma função que me permite disponibilizar o conteúdo de um arquivo para o outro.
-- Normalmente ficam em uma pasta chamada 📁***components***, porém poderemos criar mais pastas dependendo da organização e foco do nosso projeto.
+Aula 7 
+### Utilizando React Fragments
 
-📂**src** - Utilizaremos bastante para criação de novos arquivos e pastas.
+- Os ***React Fragments*** permitem a criação de um componente sem elemento pai;
+Ou seja não é preciso colocar mais aquela DIV que era "obrigatória" nas aulas anteriores, vamos simplesmente utilizar de um ```placeholder``` e aí podemos entregar diversos componentes filhos a partir disso.
 
-### Criação do Componente
-Quando a gente cria um componente, seja ele o que for a gente sempre vai ter que trabalhar com a seguinte case/convenção: **letras maiúsculas as iniciais e as que separam as outras palavram também**.
+Basicamente é algo que retorna um elemento só, que é um requisito do React, mas ele não entrega um tag assim não sendo obrigatória a DIV. 
 
-**Exemplo -** Consigo separar HelloWorld em duas palavras (Hello World), então o nome do seu arquivo vai ser HelloWorld.
+- O propósito é descomplicar os nós de DOM;
 
 
-**Algumas Observações** 🧐
-- No react declarar função é basicamente a mesma coisa que criar um componente.
-- Além disso, o return no React é diferente do que return nas outras linguagens, como estamos encapsulando o **JSX** teremos um ```()``` abre e fecha parênteses e dentro desses parênteses a gente coloca o nosso **HTML**.
-- Sempre bom lembrar que precisamos de um wrapper, que é algo que vai envolver todo o nosso componente que pode ser uma div, nem sempre é, mas geralmente é.
+- A sintaxe é ```<>``` e ```</>```, não há um nome para a tag;
 
-### Primeiro componente criado
+
+- Criamos no próprio ***JSX***.
+
+
+Criamos um novo arquivo chamado  🟨***List.js*** para mostrar na prática como funcionaria o fragments.
+E seria da seguinte forma:
+
 ```bash
-function HelloWorld() {
-
+function List() {
     return (
-        <div>
-            <h1>Meu primeiro Componente</h1>
-        </div>
+        <>
+            <h1>Minha lista</h1>
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </>
     )
 }
-export default HelloWorld
+
+export default List
 ```
 
-Para estarmos conseguindo utilizar esse componente em outro arquivo, para que assim o mesmo seja exibido na nossa página, temos que importar o componente e informar arquivo em que esse componente está por meio do ```import``` no 🟨***App.js***.
+Temos o conteúdo da lista envolto por tags vazias e não mais aquela DIV que anteriormente era "obrigatória".
 
+
+Uma outra forma de reaproveitar componentes seria a de criar um arquivo para os itens e passar eles por meio de props para a Lista.
+Dessa forma aqui
+
+🟨 ***Item.js***
 ```bash
-import HelloWorld from './components/HelloWorld';
-```
-
-Porém apenas importar não é o suficiente, para que o componente apareça no site precisamos "chamar" o mesmo no nosso código, por enquanto só importamos, para estarmos conseguindo chamar esse componente basta abrir e fechar tag e digitar o nome do componente:
-
-```
-<HelloWorld/>
-```
-
-Outro conceito fundamental dos componentes é que os mesmos tem que ser reutilizáveis, ou seja, temos que poder utilizar o componente em qualquer lugar da minha aplicação e poder renderizar coisas diferentes com esse componente.
-
-### Importando componentes dentro de componentes
-Um ponto legal é que não precisamos necessariamente importar os componentes lá no 🟨***App.js***, podemos importar em outros componentes e assim fazer uma "escadinha", onde um puxa o outro.
-
-#### Exemplo:
-Criamos outro componente chamado Frase em um arquivo diferente e importamos esse componente no arquivo do componente HelloWord.
-
-🟨**Frase.js**
-```bash
-function Frase() {
-    return (
-        <div>
-            <p>Este é um componente com uma frase!</p>
-        </div>
+function Item(props) {
+    return(
+        <>
+            <li>
+                {props.marca}
+            </li>
+            <p>Teste</p>
+        </>
     )
 }
-export default Frase
+
+export default Item
 ```
 
-🟨***HelloWorld.js***
+🟨 ***List.js***
 ```bash
-import Frase from "./Frase"
+import Item from "./Item"
 
-function HelloWorld() {
+function List() {
     return (
-        <div>
-            <Frase/>
-            <h1>Meu primeiro Componente</h1>
-        </div>
+        <>
+            <h1>Minha lista</h1>
+            <ul>
+               <Item marca="Ferrari"/>
+               <Item marca="Fiat"/>
+               <Item marca="Renault"/>
+            </ul>
+        </>
     )
 }
-export default HelloWorld
+
+export default List
 ```
-
-Nesse caso importamos o componente **Frase** no componente **HelloWorld** e dessa maneira passamos apenas o HelloWorld, com o componente Frase dentro dele, para o 🟨***App.js***:
-```bash
-import './App.css';
-import HelloWorld from './components/HelloWorld';
-
-function App() {
-
-  const name = 'Thiago'
-  const newName = name.toUpperCase()
-
-  function sum(a, b) {
-    return a + b
-  }
-
-  const url = "https://via.placeholder.com/150"
-  return (
-    <div className="App">
-     <h2>Alterando o JSX</h2>
-     <p>Olá, {newName}</p>
-     <p>Soma: {sum(1,2)}</p> {/*Executando algumas funções do próprio JavaScript */}
-    <img src={url} alt='Minha Imagem'/>
-    <HelloWorld/>
-    </div>
-  );
-}
-
-export default App;
-```
-
-A saída disso no site:
-![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/529e96a7-f7c6-40e2-a6fb-e94b8018a06d)
-
-#### Reutilização de um mesmo componente
-Exemplo simples de reutilização de um componente:
-
-🟨***HelloWorld.js***
-```bash
-        <div>
-            <Frase/>
-            <h1>Meu primeiro Componente</h1>
-            {/* Exemplo de reutilização */}
-            <Frase/> 
-            <Frase/>
-        </div>
-export default HelloWorld
-```
-
-Saída disso no site:
-![image](https://github.com/1thiagoCRUZ/curso_react/assets/86666413/f6b6d569-dd8a-42e6-bab6-0f3efdcafdd5)
