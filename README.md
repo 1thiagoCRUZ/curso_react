@@ -1,4 +1,4 @@
-# Aula 7 
+## Aula 7 
 ### Utilizando React Fragments
 
 - Os ***React Fragments*** permitem a criação de um componente sem elemento pai;
