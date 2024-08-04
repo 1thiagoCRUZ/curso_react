@@ -621,7 +621,7 @@ Faltou a marca - 0
 
 Definimos no arquivo do nosso componente a função do mesmo normalmente
 
-🟨 ***Evento.js***
+🟨***Evento.js***
 ```bash
 function Evento() {
 
@@ -651,7 +651,7 @@ function meuEvento() {
     }
 ```
 
-Dentro do 🟨 ***App.js*** nós importamos o componente e declaramos ele no return:
+Dentro do 🟨***App.js*** nós importamos o componente e declaramos ele no return:
 ```bash
 import './App.css';
 import Evento from './components/Evento';
@@ -694,7 +694,7 @@ function Evento({ numero }) {
 export default Evento
 ```
 
-Dessa forma o 🟨 ***App.js*** ficaria da seguinte forma:
+Dessa forma o 🟨***App.js*** ficaria da seguinte forma:
 ```bash
 import './App.css';
 import Evento from './components/Evento';
@@ -722,7 +722,8 @@ No site não mudaria muita coisa, a única diferença é que ao clicar no primei
 É um método muito utilizado em formulários e vai ser bastante importante para nós ao decorrer do projeto
 
 Definimos no arquivo do nosso componente a função do mesmo normalmente, como o anterior:
-🟨 ***Form.js***
+
+🟨***Form.js***
 ```bash
 function Form () {
 
@@ -757,7 +758,7 @@ function cadastrarUsuario() {
     }
 ```
 
-Lá no 🟨 ***App.js*** importamos o componente Form e colocamos ele abaixo dos componentes de Evento:
+Lá no 🟨***App.js*** importamos o componente Form e colocamos ele abaixo dos componentes de Evento:
 ```bash
 import './App.css';
 import Evento from './components/Evento';
