@@ -1,78 +1,63 @@
-Aula 7 
-### Utilizando React Fragments
-
-- Os ***React Fragments*** permitem a criação de um componente sem elemento pai;
-Ou seja não é preciso colocar mais aquela DIV que era "obrigatória" nas aulas anteriores, vamos simplesmente utilizar de um ```placeholder``` e aí podemos entregar diversos componentes filhos a partir disso.
-
-Basicamente é algo que retorna um elemento só, que é um requisito do React, mas ele não entrega um tag assim não sendo obrigatória a DIV. 
-
-- O propósito é descomplicar os nós de DOM;
+Aula 8
+### Avançando em props
+- Podemos definir tipos para as ```props```, ou seja string, number e por ai vai, realizando uma espécie de validação;
+Isso melhora o desenvolvimento do projeto como um todo.
+- Definimos em um objeto chamado ```propTypes``` no próprio componente;
+- E ainda há a possibilidade de definir um valor padrão;
+- Neste caso utilizamos o objeto ```defaultProps```;
 
 
-- A sintaxe é ```<>``` e ```</>```, não há um nome para a tag;
-
-
-- Criamos no próprio ***JSX***.
-
-
-Criamos um novo arquivo chamado  🟨***List.js*** para mostrar na prática como funcionaria o fragments.
-E seria da seguinte forma:
-
+#### Como utilizar o propTypes?
+Vamos importar o pacote por meio da linha de código abaixo:
 ```bash
-function List() {
-    return (
-        <>
-            <h1>Minha lista</h1>
-            <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
-        </>
-    )
-}
-
-export default List
+import PropTypes from 'prop-types'
 ```
 
-Temos o conteúdo da lista envolto por tags vazias e não mais aquela DIV que anteriormente era "obrigatória".
-
-
-Uma outra forma de reaproveitar componentes seria a de criar um arquivo para os itens e passar eles por meio de props para a Lista.
-Dessa forma aqui
-
-🟨 ***Item.js***
+E dessa outra forma nós conseguimos definir os tipos do nosso componente Item:
 ```bash
-function Item(props) {
-    return(
-        <>
-            <li>
-                {props.marca}
-            </li>
-            <p>Teste</p>
-        </>
-    )
+Item.propTypes = {
+    marca: PropTypes.string,
+    ano_lancamento: PropTypes.number
 }
-
-export default Item
 ```
 
-🟨 ***List.js***
+É importante que o código acima seja declarado dentro do componente em questão.
+
+
+
+Podemos falar também que o tipo é requerido/obrigatório, definindo do seguinte jeito:
 ```bash
-import Item from "./Item"
-
-function List() {
-    return (
-        <>
-            <h1>Minha lista</h1>
-            <ul>
-               <Item marca="Ferrari"/>
-               <Item marca="Fiat"/>
-               <Item marca="Renault"/>
-            </ul>
-        </>
-    )
+Item.propTypes = {
+    marca: PropTypes.string.isRequired,
+    ano_lancamento: PropTypes.number.isRequired
 }
-
-export default List
 ```
+
+
+Caso não coloquemos o conteúdo do componente de maneira adequada ainda assim o conteúdo será imprimido na web, porém, vai ocorrer um erro que é possível ver no console do navegador.
+
+
+#### DeafultProps
+Podemos também utilizar o ```defaultProps``` que coloca um valor default pro nosso Item, ele é declarado da seguinte maneira:
+```bash
+Item.defaultProps = {
+    marca: 'Faltou a marca',
+    ano_lancamento: 0,
+}
+```
+
+Dessa maneira o ```required``` cai por terra, pois estamos passando um valor default para os itens (é como se o default preenchesse o valor que é requerido).
+
+Então se o nosso Item estiver dessa forma aqui:
+```bash 
+<Item />
+```
+
+
+No site ele aparecerá com o conteúdo que preenchemos no ```defaultProps```:
+
+Faltou a marca - 0
+
+
+É algo bem legal de se utilizar se levarmos em conta requisições de informações no backend também, pois se o usuário não informar um valor a gente consegue utilizar esse ```defaultProps``` como conteúdo.
+
