@@ -1,4 +1,4 @@
-Aula 8
+## Aula 8
 ### Avançando em props
 - Podemos definir tipos para as ```props```, ou seja string, number e por ai vai, realizando uma espécie de validação;
 Isso melhora o desenvolvimento do projeto como um todo.
