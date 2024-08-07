@@ -8,7 +8,7 @@
 Um ponto importante sobre eventos é que se passarmos eles com o () o programa entende que ele será executado assim que o componente é criado e quando passamos sem o parênteses o componente entende que estamos mandando uma função para ele executar depois, sendo o que a gente quer para esse caso.
 
 
-#### Como passar métodos por props?
+#### ❓Como passar métodos por props?
 
 Dentro do nosso arquivo 🟨***Evento.js*** a gente vai passar o nosso componente de botão da seguinte forma:
 ```bash
@@ -46,7 +46,7 @@ Retornando para o 🟨***Evento.js*** dentro da função ```Evento``` vamos cria
     }
 ```
 
-E agora passamos essas duas funções por meio da propriedade ```event```que criamos lá no arquivo do componente botão
+E agora passamos essas duas funções por meio da propriedade ```event``` que criamos lá no arquivo do componente botão
 ```bash
 return (
         <div>
