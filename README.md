@@ -1,60 +1,49 @@
-## Aula 11
-### Métodos por props
-- Os métodos também podem ser passados por props
-- Ou seja, um componente filho pode ativar o método do seu ancestral
-- Vamos acessar o método por meio de um evento
-- A sintaxe é a mesma de uma props de dados: props.meuEvento
+## Aula 12
+### Renderização por condição
+- Podemos atrelar a exibição de algum elemento a um ```IF```
+- Esta ação é chamada de ***renderização condicional***
+- Envolvemos as tags em chaves {}
+- Como as chaves executam JavaScript, criamos nossa condição
+- É possível usar o state para cirar as condições
 
-Um ponto importante sobre eventos é que se passarmos eles com o () o programa entende que ele será executado assim que o componente é criado e quando passamos sem o parênteses o componente entende que estamos mandando uma função para ele executar depois, sendo o que a gente quer para esse caso.
+Foi criado o arquivo 🟨***Condicional.js***
 
 
-#### ❓Como passar métodos por props?
-
-Dentro do nosso arquivo 🟨***Evento.js*** a gente vai passar o nosso componente de botão da seguinte forma:
+Nele declaramos as constantes para fazer um formulário condicional
 ```bash
-return (
-        <div>
-            <p>Clique para disparar um evento: </p>
-            <Button event={meuEvento} text="Primeiro Evento" />
-            <Button event={segundoEvento} text="Segundo Evento" />
-        </div>
-    )
-}
+const [email, setEmail] = useState()
+    const [userEmail, setUserEmail] = useState()
 ```
 
-Feito isso temos que criar o componente Botão em questão, uma dica muito valiosa é a de que devemos sempre organizar direitinho a estrutura do nosso projeto, separando os componentes por suas respectivas páginas.
-
-No arquivo 🟨***Button.js*** criamos nosso componente:
+Função responsável por enviar o e-mail do formulário
 ```bash
-function Button(props) {
-    return <button onClick={props.event}>{props.text}</button>
-}
-
-export default Button
-```
-
-Então na função do nosso componente a gente passa que ele vai ter/receber ```props``` e no ```return``` nós retornamos um botão com o método ```onClick``` nele e passando as ```props.event```
-
-Retornando para o 🟨***Evento.js*** dentro da função ```Evento``` vamos criar as duas funções que vamos passar como ```props```
-```bash
-    function meuEvento() {
-        console.log(`Ativando primeiro evento`)
-    }
-
-    function segundoEvento() {
-        console.log("Ativando o segundo evento")
+function enviarEmail(e) {
+        e.preventDefault()
+        setUserEmail(email)
+        console.log(userEmail)
     }
 ```
 
-E agora passamos essas duas funções por meio da propriedade ```event``` que criamos lá no arquivo do componente botão
+#### Exemplo do IF no formulário onde se o formulário estiver preenchido vai aparecer uma div com um botão, se o formulário estiver vazio a div não será apresentada:
+
 ```bash
 return (
-        <div>
-            <p>Clique para disparar um evento: </p>
-            <Button event={meuEvento} text="Primeiro Evento" />
-            <Button event={segundoEvento} text="Segundo Evento" />
+        <div><h2>Cadastre seu e-mail: </h2>
+        <form>
+            <input 
+            type="email" 
+            placeholder="Digite o seu e-mail..."
+            onChange={(e) => setEmail(e.target.value)}></input>
+            <button onClick={enviarEmail}>Enviar e-mail</button>
+        {userEmail && (
+            <div>
+                <p>O e-mail do usuário é: {userEmail}</p>
+                <button onClick={limparEmail}>Limpar</button>
+            </div>
+        )}
+        </form>
         </div>
     )
 ```
 
-
+Nesse caso o ```IF``` é feito dentro das chaves e também a condição é representada por dois E's comerciais, a função de limpar o e-mail é só uma forma de colocar a prova que se o e-mail não estiver preenchido a ```div``` não será retornada.
