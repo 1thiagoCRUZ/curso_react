@@ -1,47 +1,60 @@
-## Aula 10
-### useState na prática
+## Aula 11
+### Métodos por props
+- Os métodos também podem ser passados por props
+- Ou seja, um componente filho pode ativar o método do seu ancestral
+- Vamos acessar o método por meio de um evento
+- A sintaxe é a mesma de uma props de dados: props.meuEvento
 
-- O useState (usado para manipulação de dados) é um hook do React
+Um ponto importante sobre eventos é que se passarmos eles com o () o programa entende que ele será executado assim que o componente é criado e quando passamos sem o parênteses o componente entende que estamos mandando uma função para ele executar depois, sendo o que a gente quer para esse caso.
 
-- Com ele conseguimos manusear o estado de um componente de forma simples
 
-- Este hook funciona muito bem com eventos
+#### Como passar métodos por props?
 
-- Podemos atrelar um evento a mudança de state
-
-Para utilizar o state basta importar o mesmo por meio da linha de código abaixo:
+Dentro do nosso arquivo 🟨***Evento.js*** a gente vai passar o nosso componente de botão da seguinte forma:
 ```bash
-import { useState } from "react" //useState é o nosso hook para este caso
+return (
+        <div>
+            <p>Clique para disparar um evento: </p>
+            <Button event={meuEvento} text="Primeiro Evento" />
+            <Button event={segundoEvento} text="Segundo Evento" />
+        </div>
+    )
+}
 ```
 
-Vamos trabalhar com constantes, duas para cada campo, como alteramos o usuário para ter nome e senha vai ficar da seguinte maneira essa parte da declaração de constantes:
+Feito isso temos que criar o componente Botão em questão, uma dica muito valiosa é a de que devemos sempre organizar direitinho a estrutura do nosso projeto, separando os componentes por suas respectivas páginas.
+
+No arquivo 🟨***Button.js*** criamos nosso componente:
 ```bash
-const [name, setName] =
-const [password, setPassword] =
+function Button(props) {
+    return <button onClick={props.event}>{props.text}</button>
+}
+
+export default Button
+```
+
+Então na função do nosso componente a gente passa que ele vai ter/receber ```props``` e no ```return``` nós retornamos um botão com o método ```onClick``` nele e passando as ```props.event```
+
+Retornando para o 🟨***Evento.js*** dentro da função ```Evento``` vamos criar as duas funções que vamos passar como ```props```
+```bash
+    function meuEvento() {
+        console.log(`Ativando primeiro evento`)
+    }
+
+    function segundoEvento() {
+        console.log("Ativando o segundo evento")
+    }
+```
+
+E agora passamos essas duas funções por meio da propriedade ```event```que criamos lá no arquivo do componente botão
+```bash
+return (
+        <div>
+            <p>Clique para disparar um evento: </p>
+            <Button event={meuEvento} text="Primeiro Evento" />
+            <Button event={segundoEvento} text="Segundo Evento" />
+        </div>
+    )
 ```
 
 
-A primeira do "nome" do campo, ou seja, o nome do que eu quero tratar e o segundo seria o que vai ser alterado.
-
-
-name - o que vai ser resgatado
-
-setName - o que vai ser alterado, o que eu vou atribuir para poder alterar o valor que está em name
-
-
-#### Como alterar o valor baseado na mudança de valor do input?
-
-Vamos colocar um evento de ```onChange``` e nesse próprio método fazer uma função para capturar o valor do ```input```
-
-
-```bash
-onChange={(e) => setName(e.target.value)}
-```
-
-Isso vai fazer com que a cada letra digitada dentro desse campo seja modificado o valor no state
-
-
-Fazemos a mesma coisa para o campo de password e no final interpolamos tudo em um único print no console:
-```bash
-console.log(`Usuário ${name} foi cadastrado com a senha: ${password}`)
-```
