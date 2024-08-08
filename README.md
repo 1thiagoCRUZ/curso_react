@@ -38,7 +38,7 @@ Com isso feito basta no 🟨***App.js*** importar o componente da lista e passar
 ❗ Isso vai imprimir os itens da lista, porém, tem algo para se notar no console que é um erro do próprio React, quando a gente faz um ```map```, por exemplo, a gente precisa que cada um dos itens tenha um ID único na propriedade key.
 
 
-❓ Como arrumar isso?
+❓#### Como arrumar isso?
 
 Nesse caso vamos utilizar o índice dos elementos da lista como chave, não é o mais recomendado, porém, como é um exemplo vai servir por enquanto. O ideal seria utilizar de fato o id que vem do banco de dados.
 
