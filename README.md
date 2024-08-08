@@ -17,6 +17,7 @@ const meusItens = ['React', 'Vue', 'Angular']
 ```
 
 Agora no 🟨***OutraLista.js**** a gente coloca o ```map``` para percorrer os itens da nossa lista da seguinte forma abaixo
+```bash
 <>
         <h3>Lista de coisas boas:</h3>
         {
@@ -25,6 +26,7 @@ Agora no 🟨***OutraLista.js**** a gente coloca o ```map``` para percorrer os i
             ))
         }
 </>
+```
 
 Com isso feito basta no 🟨***App.js*** importar o componente da lista e passar a lista como propriedade para o componente
 ```bash
@@ -37,6 +39,7 @@ Com isso feito basta no 🟨***App.js*** importar o componente da lista e passar
 
 
 ❓ Como arrumar isso?
+
 Nesse caso vamos utilizar o índice dos elementos da lista como chave, não é o mais recomendado, porém, como é um exemplo vai servir por enquanto. O ideal seria utilizar de fato o id que vem do banco de dados.
 
 ```bash
