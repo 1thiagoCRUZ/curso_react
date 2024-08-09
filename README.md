@@ -15,6 +15,7 @@ Dentro do ***🟨App.js*** que é o componente pai nesse caso, a gente vai estar
 ```
 
 Dentro do nosso componente ```SeuNome``` vamos retornar a propriedade setNome como sendo o ```setNome``` definido acima
+
 ***🟨SeuNome.js***
 ```bash
 function SeuNome({ setNome })
