@@ -64,16 +64,3 @@ Dessa forma o site vai capturar cada letra que digitarmos e já exibir na tela.
 
 
 
-## Aula 15
-### React Router
-- O React Router é um pacote para mudança de URLs da aplicação
-- Podemos assim acessar outras views, sem o page reload
-- Trocando apenas uma parte do layout da aplicação, ou seja, o que meda de view para view
-- Precisamos instalar este pacote no projeto
-- E também realizar algumas mudanças em como o App é estruturado
-
-
-Para a instalação do pacote executar o seguinte comando abaixo no terminal do editor
-```bash
-npm install react-router-dom
-```
