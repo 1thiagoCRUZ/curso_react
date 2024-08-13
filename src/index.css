@@ -1,14 +1,11 @@
-body {
-  padding: 50px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+html, body, #root {
   background-color: #efefef;
-  padding-bottom: 500px;
-}
-
-h1 {
-  color: red;
-}
-
-p {
-  background-color: blue;
-  padding: 10px;
+  height: 100%;
 }
