@@ -1,15 +1,15 @@
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styles from './NewProject.module.css'
 import ProjectForm from '../project/ProjectForm'
 
 
-function NewProjetct() {
+function NewProject() {
 
   /* Esse hook permite redirecionar o usuário quando for necessário
   Nesse caso quando o usuário fizer uma requisição POST podemos redirecioná-lo
   para outra página */
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   // Função responsável por inserir o projeto no sistema
   function createPost(project) {
@@ -30,6 +30,7 @@ function NewProjetct() {
           console.log(data)
 
           // espaço para o redirect
+          navigate.push('/projects', {message: 'Projeto criado com sucesso!'})
         })
     ).catch(err => console.log(err))
   }
@@ -43,4 +44,4 @@ function NewProjetct() {
   )
 }
 
-export default NewProjetct
+export default NewProject

@@ -4,7 +4,6 @@ import Input from '../form/Input'
 import Select from '../form/Select'
 import SubmitButton from '../form/SubmitButton'
 import styles from './Project.module.css'
-import { PiRocket } from 'react-icons/pi'
 
 function ProjectForm({ handleSubmit, btnText, projectData }) {
     // Vai começar como um array vazio esperando a resposta que vai vir da API
@@ -29,12 +28,24 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
 
     const submit = (e) => {
         e.preventDefault()
+        // console.log(project)
         handleSubmit(project)
     }
 
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
-        console.log(project)
+    }
+
+    function handleCategory(e) {
+        setProject({ 
+            ...project, category: {
+            id: e.target.value,
+            /* A partir desse cara aqui abaixo vamos conesguir acessar qual opção 
+            está selecionada por meio do indice, na linha de cima temos a opção
+            e nessa daqui vamos pegar o text dela */
+            name: e.target.options[e.target.selectedIndex] 
+        },
+    })
     }
 
     return (
@@ -45,6 +56,7 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
             name="name" 
             placeholder="Insira o nome do projeto"
             handleOnChange={handleChange} 
+            value={project.name ? project.name : ''}
             />
 
             <Input 
@@ -53,12 +65,18 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
             name="budget" 
             placeholder="Insira o orçamento total"
             handleOnChange={handleChange} 
+            value={project.budget ? project.budget : ''}
              />
 
             <Select 
             name="category_id" 
             text="Selecione a categoria" 
-            options={categories} />
+            options={categories}
+            handleOnChange={handleCategory} 
+            // Se a categoria estiver preenchida passa o valor dela
+            // Se não passa espaço em branco
+            value={project.category ? project.category.id : ''}
+            />
 
             <SubmitButton text={btnText} />
         </form>
