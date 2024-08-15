@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Input from '../form/Input'
 import Select from '../form/Select'
 import SubmitButton from '../form/SubmitButton'
-import styles from './Project.module.css'
+import styles from './ProjectForm.module.css'
 
 function ProjectForm({ handleSubmit, btnText, projectData }) {
     // Vai começar como um array vazio esperando a resposta que vai vir da API
@@ -43,7 +43,7 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
             /* A partir desse cara aqui abaixo vamos conesguir acessar qual opção 
             está selecionada por meio do indice, na linha de cima temos a opção
             e nessa daqui vamos pegar o text dela */
-            name: e.target.options[e.target.selectedIndex] 
+            name: e.target.options[e.target.selectedIndex].text
         },
     })
     }
