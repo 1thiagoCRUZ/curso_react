@@ -54,6 +54,17 @@
       },
       "cost": 0,
       "services": []
+    },
+    {
+      "id": "c5e2",
+      "name": "SIM",
+      "budget": "20",
+      "category": {
+        "id": "2",
+        "name": "Desenvolvimento"
+      },
+      "cost": 0,
+      "services": []
     }
   ],
   "categories": [
