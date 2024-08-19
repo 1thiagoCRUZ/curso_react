@@ -32,6 +32,28 @@
       },
       "cost": 0,
       "services": []
+    },
+    {
+      "id": "a1e3",
+      "name": "TCC GJT",
+      "budget": "1222",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 0,
+      "services": []
+    },
+    {
+      "id": "4e48",
+      "name": "meu projeto",
+      "budget": "322",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 0,
+      "services": []
     }
   ],
   "categories": [
