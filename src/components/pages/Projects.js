@@ -14,6 +14,8 @@ function Projects() {
   /* Começa com false pois o loader sempre inicia, o true vai servir para remover o loader */
   const [removeLoading, setRemoveLoading] = useState(false)
 
+  const [projectMessage, setProjectMessage] = useState('')
+
   /* Constante que vai ser o useLocation */
   const location = useLocation()
 
@@ -47,6 +49,19 @@ function Projects() {
     }, 500)
   }, [])
 
+  function removeProject(id) {
+    fetch(`http://localhost:5000/projects/${id}`, {
+      method: 'DELETE', // Dessa forma ele entende que é uma rota para remover
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(resp => resp.json()).then(data => {
+      setProjects(projects.filter((project) => project.id !== id))
+      // Espaço para a mensagem de remoção
+      setProjectMessage('Projeto removido com sucesso!')
+    }).catch(err => console.log(err))
+  }
+
   return (
     <div className={styles.project_container}>
       <div className={styles.title_container}>
@@ -57,18 +72,19 @@ function Projects() {
         Passamos o type succes porque sabemos que quando ele vem desse jeito sempre 
         vai ser sucesso */}
       {message && <Message type="success" msg={message} />}
-
+      {projectMessage && <Message type="success" msg={projectMessage} />}
       <Container customClass="start">
         {projects.length > 0 &&
-        projects.map((project) => (
-          <ProjectCard 
-          id={project.id}
-          name={project.name}
-          budget={project.budget}
-          category={project.category.name}
-          key={project.id}
-          />
-        ))}
+          projects.map((project) => (
+            <ProjectCard
+              id={project.id}
+              name={project.name}
+              budget={project.budget}
+              category={project.category.name}
+              key={project.id}
+              handleRemove={removeProject}
+            />
+          ))}
         {!removeLoading && <Loading />}
         {removeLoading && projects.length === 0 && (
           <p>Não há projetos cadastrados :(</p>
