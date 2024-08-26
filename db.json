@@ -8,8 +8,15 @@
         "id": "3",
         "name": "Design"
       },
-      "cost": 0,
-      "services": []
+      "cost": 13999,
+      "services": [
+        {
+          "name": "Sei la ",
+          "cost": "13999",
+          "description": "ele faz algo",
+          "id": "4cf8e2c6-f724-4d1e-b982-6104d0c0035d"
+        }
+      ]
     }
   ],
   "categories": [
