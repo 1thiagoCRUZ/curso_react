@@ -4,7 +4,9 @@ import styles from '../project/ProjectCard.module.css'
 function ServiceCard({id, name, cost, description, handleRemove}) {
 
     const remove = (e) => {
-
+        e.preventDefault()
+        // Passamos o custo para saber de qual o projeto que estamos querendo reduzir o valor
+        handleRemove(id, cost)
     }
 
     return (
