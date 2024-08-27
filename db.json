@@ -8,15 +8,32 @@
         "id": "3",
         "name": "Design"
       },
-      "cost": 13999,
+      "cost": 14011,
       "services": [
         {
           "name": "Sei la ",
           "cost": "13999",
           "description": "ele faz algo",
           "id": "4cf8e2c6-f724-4d1e-b982-6104d0c0035d"
+        },
+        {
+          "name": "Pai",
+          "cost": "12",
+          "description": "Ser pai de teste",
+          "id": "57a81584-b109-49a0-ad19-b6882cefd7ff"
         }
       ]
+    },
+    {
+      "id": "26aa",
+      "name": "Pai",
+      "budget": "12",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 0,
+      "services": []
     }
   ],
   "categories": [
